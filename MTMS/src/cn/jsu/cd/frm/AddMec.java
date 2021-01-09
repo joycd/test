@@ -15,6 +15,7 @@ import cn.jsu.cd.vo.NowString;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class AddMec {
 
@@ -54,6 +55,7 @@ public class AddMec {
 	 */
 	private void initialize() {
 		frame = new JFrame("重型机械添加");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(AddMec.class.getResource("/img/15.png")));
 		frame.setBounds(100, 100, 533, 316);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);

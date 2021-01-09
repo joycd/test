@@ -20,6 +20,7 @@ import cn.jsu.cd.service.MtypeService;
 import cn.jsu.cd.service.TtypeService;
 import cn.jsu.cd.service.impl.MtypeserviceImpl;
 import cn.jsu.cd.service.impl.TtypeServiceImpl;
+import java.awt.Toolkit;
 
 public class Ttype extends JFrame{
 	private JPanel contentPane;// 定义窗体内容面板，放置各组件
@@ -49,6 +50,7 @@ public class Ttype extends JFrame{
 	 * Create the application.
 	 */
 	public Ttype() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Ttype.class.getResource("/img/8.png")));
 		initialize();
 	}
 

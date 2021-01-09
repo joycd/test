@@ -8,7 +8,6 @@ public class Test extends TestCase{
 		 public void testfind() {
 			 MechanicsService mec=new MechanicsServiceImpl();
 			 int m_id=1;
-//			 String sql="select * from Mechanics where m_id=1";
 			 boolean bl=mec.searchId(m_id);
 			 assertTrue(bl);
 		 }

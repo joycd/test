@@ -22,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.Toolkit;
 
 public class Mtype extends JFrame{
 	private JPanel contentPane;// 定义窗体内容面板，放置各组件
@@ -40,6 +41,7 @@ public class Mtype extends JFrame{
 	 * Create the application.
 	 */
 	public Mtype() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Mtype.class.getResource("/img/15.png")));
 		initialize();
 	}
 

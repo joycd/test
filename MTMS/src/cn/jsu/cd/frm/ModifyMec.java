@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 public class ModifyMec {
 
@@ -80,6 +81,8 @@ public class ModifyMec {
 			frame.setBounds(100, 100, 532, 383);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.getContentPane().setLayout(null);
+			frame.setIconImage(Toolkit.getDefaultToolkit().getImage(AddMec.class.getResource("/img/15.png")));
+
 			
 			JLabel label = new JLabel("机械编号：");
 			label.setBounds(48, 54, 86, 18);
@@ -199,33 +202,36 @@ public class ModifyMec {
 				public void actionPerformed(ActionEvent e) {
 					int t_id=Integer.parseInt(textField_7.getText());
 					Vector<Vector> tra=tservice.searchById(t_id);
-					if(tra.size()!=0){
-						int k=(int) tra.get(0).get(6);
-						System.out.println(k);
-						if(k==0){
-							String sql="update Mechanics set m_name="+"'"+textField_1.getText()+"'"+
-							",m_weight="+Float.parseFloat(textField_2.getText())+
-							",m_area="+Float.parseFloat(textField_3.getText())+
-							",m_function="+"'"+textField_4.getText()+"'"+
-							",m_time="+"'"+textField_5.getText()+"'"+
-							",ty_id="+Integer.parseInt(textField_6.getText())+
-							",t_id="+Integer.parseInt(textField_7.getText())+
-							" where m_id = "+mec.get(0).get(0);
-						
-						
 					
-						String sql1="update Transport set t_flag=1 where t_id="+textField_7.getText().trim();
-						mecservice.updata(sql);
+						if(tra.size()!=0){
+							int k=(int) tra.get(0).get(6);
+							System.out.println(k);
+							if(k==0){
+								String sql="update Mechanics set m_name="+"'"+textField_1.getText()+"'"+
+								",m_weight="+Float.parseFloat(textField_2.getText())+
+								",m_area="+Float.parseFloat(textField_3.getText())+
+								",m_function="+"'"+textField_4.getText()+"'"+
+								",m_time="+"'"+textField_5.getText()+"'"+
+								",ty_id="+Integer.parseInt(textField_6.getText())+
+								",t_id="+Integer.parseInt(textField_7.getText())+
+								" where m_id = "+mec.get(0).get(0);
+							
+							
 						
-						JOptionPane.showMessageDialog(null, "重型机械修改成功！");
-						tservice.updata(sql1);
-						JOptionPane.showMessageDialog(null, "运输车同步成功！");
+							String sql1="update Transport set t_flag=1 where t_id="+textField_7.getText().trim();
+							mecservice.updata(sql);
+							
+							JOptionPane.showMessageDialog(null, "重型机械修改成功！");
+							tservice.updata(sql1);
+							JOptionPane.showMessageDialog(null, "运输车同步成功！");
+							}else {
+								JOptionPane.showMessageDialog(null, "运输车正在运输中！");
+							}
 						}else {
-							JOptionPane.showMessageDialog(null, "运输车正在运输中！");
-						}
-					}else {
-						JOptionPane.showMessageDialog(null, "运输车信息填写错误！");
+							JOptionPane.showMessageDialog(null, "运输车信息填写错误！");
+						
 					}
+					
 					
 					
 				}

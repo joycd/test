@@ -19,6 +19,7 @@ import cn.jsu.cd.vo.NowString;
 import cn.jsu.cd.vo.Transport;
 
 import java.awt.Font;
+import java.awt.Toolkit;
 
 public class AddTra {
 
@@ -62,7 +63,8 @@ public class AddTra {
 		frame.setBounds(100, 100, 533, 316);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(TraFrame.class.getResource("/img/8.png")));
+
 		JLabel lblNewLabel = new JLabel("‘À ‰≥µ—’…´£∫");
 		lblNewLabel.setBounds(57, 41, 106, 18);
 		frame.getContentPane().add(lblNewLabel);

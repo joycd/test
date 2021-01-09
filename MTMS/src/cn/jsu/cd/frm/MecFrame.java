@@ -106,10 +106,13 @@ public class MecFrame {
 		
 		String sql="select * from Mechanics";
 		bigList = mecservice.searchAll(sql);//获取第一页的数据
+
+		Vector<Vector> excleList=bigList;
 		int recode=bigList.size();//总行数
 		System.out.println("总行数："+recode);
 		
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(AddMec.class.getResource("/img/15.png")));
 		frame.setBounds(100, 100, 730, 431);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -194,6 +197,7 @@ public class MecFrame {
 				//下拉框
 				comboBox.addItemListener(new ItemListener() {//页数下拉框选择改变事件
 				public void itemStateChanged(ItemEvent e) {
+//					textField.setText("1");
 					pagecount=Integer.parseInt(comboBox.getSelectedItem().toString());//每页显示多少条
 					page=pageservice.getPage(pagecount, recode);//总页数
 					System.out.println("每页显示："+pagecount);
@@ -279,12 +283,15 @@ public class MecFrame {
 				btnexcle.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						File file=new File("./src/test1.xlsx");//定位要操作的excel文件
-						mecservice.excleIn(bigList, file);
+						mecservice.excleIn(excleList, file);
 						JOptionPane.showMessageDialog(null, "导出成功");
 					}
 				});
 				btnexcle.setBounds(285, 345, 113, 27);
 				frame.getContentPane().add(btnexcle);
+				
+				
+				
 				btnNewButton_6.addActionListener(new ActionListener() {
 					
 					@Override

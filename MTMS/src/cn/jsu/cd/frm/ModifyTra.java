@@ -2,6 +2,7 @@ package cn.jsu.cd.frm;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -31,6 +32,7 @@ public class ModifyTra {
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private static int t_id=2;
+	int flag=0;
 
 	/**
 	 * Launch the application.
@@ -67,14 +69,16 @@ public class ModifyTra {
 	private void initialize() {
 		if(t_id!=0){
 			PageService pageservice=new PageServiceImpl();
-			TransportService mecservice=new TransportServiceImpl();
-			Vector<Vector> mec=mecservice.searchById(this.t_id);
+			MechanicsService mecservice=new MechanicsServiceImpl();
+			TransportService traservice=new TransportServiceImpl();
+			Vector<Vector> mec=traservice.searchById(this.t_id);
 			
 			
 			frame = new JFrame();
 			frame.setBounds(100, 100, 532, 383);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.getContentPane().setLayout(null);
+			frame.getContentPane().setLayout(null);		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(TraFrame.class.getResource("/img/8.png")));
+
 			
 			JLabel label = new JLabel("运输车编号：");
 			label.setBounds(48, 54, 86, 18);
@@ -149,7 +153,7 @@ public class ModifyTra {
 			textField_6.addActionListener(new ActionListener(){
 				   public void actionPerformed(ActionEvent arg0) {
 					int k=Integer.parseInt(textField_6.getText());
-					if((int)mec.get(0).get(6)==0){
+					if((int)mec.get(0).get(6)==0|flag==1){
 						JOptionPane.showMessageDialog(null, "无法修改\r\n派发运输车请前往机械模块！");
 						textField_6.setText(mec.get(0).get(6)+"");
 				   }
@@ -184,10 +188,7 @@ public class ModifyTra {
 //			}
 			
 			JButton btnNewButton = new JButton("修改");
-			btnNewButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				}
-			});
+			
 			btnNewButton.setBounds(134, 285, 113, 27);
 			frame.getContentPane().add(btnNewButton);
 			
@@ -206,6 +207,7 @@ public class ModifyTra {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					frame.dispose();
+					TraFrame.main(null);
 				}
 			});
 			
@@ -225,8 +227,13 @@ public class ModifyTra {
 							",t_time="+"'"+textField_7.getText()+"'"+
 							" where t_id = "+mec.get(0).get(0);
 					
-					mecservice.updata(sql);
+					traservice.updata(sql);
 					JOptionPane.showMessageDialog(null, "修改成功！");
+					if(key==0&&(int)mec.get(0).get(6)==1){
+						String sqlm="update Mechanics set t_id=0 where t_id="+mec.get(0).get(0);
+						mecservice.updata(sqlm);
+						flag=1;
+					}
 				}
 			});
 			
